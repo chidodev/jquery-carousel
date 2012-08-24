@@ -1,0 +1,36 @@
+.carousel {
+  width: 200px;
+  overflow: hidden;
+}
+.carousel .mask {
+  width: 10000%;
+  overflow: hidden;
+}
+.carousel.ready .mask {
+  width: 100%;
+}
+.carousel ul {
+  position: relative;
+  float: left;
+  list-style-type: none;
+}
+.carousel li {
+  float: left;
+}
+.carousel img {
+  width: 200px;
+  height: auto;
+}
+.carousel .nav {
+  display: none;
+  text-align: center;
+}
+.carousel.ready .nav {
+  display: block;
+}
+.carousel .arrow.left {
+  float: left;
+}
+.carousel .arrow.right {
+  float: right;
+}

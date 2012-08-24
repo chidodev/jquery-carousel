@@ -3,46 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Simple carousel</title>
+  <link rel="stylesheet" type="text/css" href="carousel.css">
   <style type="text/css">
 * {
   margin: 0;
   padding: 0;
-}
-.carousel {
-  width: 200px;
-  overflow: hidden;
-}
-.carousel .mask {
-  width: 10000%;
-  overflow: hidden;
-}
-.carousel.ready .mask {
-  width: 100%;
-}
-.carousel ul {
-  position: relative;
-  float: left;
-  list-style-type: none;
-}
-.carousel li {
-  float: left;
-}
-.carousel img {
-  width: 200px;
-  height: auto;
-}
-.carousel .nav {
-  display: none;
-  text-align: center;
-}
-.carousel.ready .nav {
-  display: block;
-}
-.carousel .arrow.left {
-  float: left;
-}
-.carousel .arrow.right {
-  float: right;
 }
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
