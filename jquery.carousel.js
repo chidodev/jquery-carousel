@@ -29,7 +29,10 @@
       });
       // Save order index as their position is going to change
       this.children().each(function(i) {
-        $(this).data('index', i);
+        // Ignore if already set
+        if ($(this).data('index') == null) {
+          $(this).data('index', i);
+        }
       });
       // Setup and show nav only if more than one child
       if (this.children().length > 1) {
@@ -79,10 +82,10 @@
     slide: function(direct) {
       this.list.stop().animate({
         marginLeft: -this.current.position().left
-      }, direct ? 0 : 'slow');
+      }, direct ? 0 : 400);
       $(this.wrapper).find('.mask').stop().animate({
         height: this.current.outerHeight()
-      }, direct ? 0 : 'slow');
+      }, direct ? 0 : 400);
     },
     update: function() {
       // Populate navigation variables
