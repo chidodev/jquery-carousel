@@ -49,8 +49,10 @@
   <script src="jquery.carousel.js"></script>
   <script>
 $(function() {
-  $('.carousel').carousel(function(img) {
-    console.log(img);
+  $('.carousel').carousel({
+    callback: function(img) {
+      console.log($(img).prop('src'));
+    }
   });
 });
   </script>
