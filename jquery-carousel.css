@@ -1,17 +1,13 @@
 .carousel {
   width: 200px;
-  overflow: hidden;
 }
 .carousel .mask {
-  width: 10000%;
-  overflow: hidden;
-}
-.carousel.ready .mask {
   width: 100%;
+  overflow: hidden;
 }
 .carousel ul {
   position: relative;
-  float: left;
+  width: 10000%;
   list-style-type: none;
 }
 .carousel li {
@@ -22,11 +18,7 @@
   height: auto;
 }
 .carousel .nav {
-  display: none;
   text-align: center;
-}
-.carousel.ready .nav {
-  display: block;
 }
 .carousel .arrow.left {
   float: left;
