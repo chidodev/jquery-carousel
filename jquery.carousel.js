@@ -1,54 +1,54 @@
 ;(function($, window, document, undefined) {
   var Carousel = function(wrapper, options) {
-    this.wrapper = wrapper;
+    this.wrapper = wrapper
+    // Store options while extending defaults
     this.options = $.extend({}, Carousel.defaults, options);
-    // Wait until all images are loaded
-    var carousel = this, left = $(this.wrapper).find('img').load(function() {
-      if (!--left) {
-        carousel.init();
-      }
-    }).length;
+    this.init();
   };
   Carousel.defaults = {};
   Carousel.prototype = {
     init: function() {
       var carousel = this;
       this.list = $(this.wrapper).find('ul');
-      // Set list fixed width to it current automatic width
-      this.list.width(this.list.width());
-      // Mark carousel ready
-      $(this.wrapper).addClass('ready');
       // Define the children property as a method in order for it
       // to update its child order every time it changes
       this.children = function() {
         return carousel.list.find('> li');
       };
-      // Disable carousel if it has less than two items
-      if (this.children().length < 2) {
-        // Hide navigation
-        $(this.wrapper).find('.nav').hide();
-        return;
+      // Get first element if previously set
+      this.current = this.children().find('.current:first');
+      // Set first element as current otherwise
+      if (!this.current.length) {
+        this.current = this.children().first().addClass('current');
       }
+      // Re-set carousel height every time an image is loaded
+      this.children().find('img').load(function() {
+        if($(this).parent('li').hasClass('current')) {
+          carousel.slide();
+        }
+      });
       // Save order index as their position is going to change
       this.children().each(function(i) {
         $(this).data('index', i);
       });
-      // Set click events on arrow buttons
-      this.arrow = $(this.wrapper).find('.arrow').click(function(e) {
-        e.preventDefault();
-        carousel.move($(this).data('direction'));
-      });
-      // Set first element as current
-      this.current = this.children().first();
-      // Slide and update carousel for the first time
-      this.slide();
-      this.update();
+      // Setup and show nav only if more than one child
+      if (this.children().length > 1) {
+        $(this.wrapper).find('.nav').show();
+        // Bind click events on arrow buttons
+        $(this.wrapper).find('.arrow').unbind('click').click(function(e) {
+          e.preventDefault();
+          carousel.move($(this).data('direction'));
+        });
+      } else {
+        $(this.wrapper).find('.nav').hide();
+      }
+      // Init only if at least on child
+      if (this.children().length) {
+        this.slide();
+        this.update();
+      }
     },
     move: function(direction) {
-      // Return if not ready
-      if (!$(this.wrapper).hasClass('ready')) {
-        return;
-      }
       var next;
       if (direction == 'prev') {
         if (this.current.is(':first-child')) {
@@ -67,7 +67,10 @@
         }
         next = this.current.next();
       }
-      this.slide(this.current = next);
+      // Replace current element and move CSS class to it
+      this.children().removeClass('current')
+        .filter(this.current = next).addClass('current');
+      this.slide();
       this.update();
     },
     resetPosition: function() {
@@ -83,8 +86,8 @@
     },
     update: function() {
       // Populate navigation variables
-      $(this.wrapper).find('.total').html(this.children().length);
-      $(this.wrapper).find('.current').html(this.current.data('index') + 1);
+      $(this.wrapper).find('.nav .total').html(this.children().length);
+      $(this.wrapper).find('.nav .current').html(this.current.data('index') + 1);
       // Run user callback, if present
       if (typeof(this.options.callback) == 'function') {
         this.options.callback.call(this, this.current.find('img'));
