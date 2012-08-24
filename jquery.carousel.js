@@ -16,7 +16,7 @@
         return carousel.list.find('> li');
       };
       // Get first element if previously set
-      this.current = this.children().find('.current:first');
+      this.current = this.children().filter('.current').first();
       // Set first element as current otherwise
       if (!this.current.length) {
         this.current = this.children().first().addClass('current');
