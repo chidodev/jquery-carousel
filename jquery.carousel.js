@@ -24,7 +24,7 @@
       // Re-set carousel height every time an image is loaded
       this.children().find('img').load(function() {
         if($(this).parent('li').hasClass('current')) {
-          carousel.slide();
+          carousel.slide(true);
         }
       });
       // Save order index as their position is going to change
@@ -44,7 +44,7 @@
       }
       // Init only if at least on child
       if (this.children().length) {
-        this.slide();
+        this.slide(true);
         this.update();
       }
     },
@@ -76,13 +76,13 @@
     resetPosition: function() {
       this.list.stop().css('marginLeft', -this.current.position().left);
     },
-    slide: function() {
+    slide: function(direct) {
       this.list.stop().animate({
         marginLeft: -this.current.position().left
-      });
+      }, direct ? 0 : 'slow');
       $(this.wrapper).find('.mask').stop().animate({
         height: this.current.outerHeight()
-      });
+      }, direct ? 0 : 'slow');
     },
     update: function() {
       // Populate navigation variables
