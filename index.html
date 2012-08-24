@@ -13,7 +13,7 @@
   overflow: hidden;
 }
 .carousel .mask {
-  width: 1000%;
+  width: 10000%;
   overflow: hidden;
 }
 .carousel.ready .mask {
@@ -30,6 +30,19 @@
 .carousel img {
   width: 200px;
   height: auto;
+}
+.carousel .nav {
+  display: none;
+  text-align: center;
+}
+.carousel.ready .nav {
+  display: block;
+}
+.carousel .arrow.left {
+  float: left;
+}
+.carousel .arrow.right {
+  float: right;
 }
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
@@ -54,9 +67,11 @@ $(function() {
         <li><img src="images/6.jpg"></li>
       </ul>
     </div>
-    <a href="#prev" class="arrow" data-direction="prev">&lt;</a>
-    <a href="#next" class="arrow" data-direction="next">&gt;</a>
-    <p><span class="current"></span> <em>of</em> <span class="total"></span></p>
+    <p class="nav">
+      <a href="#prev" class="arrow left" data-direction="prev">&lt;</a>
+      <a href="#next" class="arrow right" data-direction="next">&gt;</a>
+      <span class="current"></span> <em>of</em> <span class="total"></span>
+    </p>
   </div>
 </body>
 </html>
