@@ -30,7 +30,8 @@
     this.current = this.children().first();
     // Mask carousel ready
     $(this.wrapper).addClass('ready');
-    // Update carousel for the first time
+    // Slide and update carousel for the first time
+    this.slide();
     this.update();
   };
   Carousel.prototype.move = function(direction) {
@@ -38,8 +39,6 @@
     if (!$(this.wrapper).hasClass('ready')) {
       return;
     }
-    // Stop any animation from continuing
-    this.list.stop();
     var next;
     if (direction == 'prev') {
       if (this.current.is(':first-child')) {
@@ -62,11 +61,14 @@
     this.update();
   };
   Carousel.prototype.resetPosition = function() {
-    this.list.css('marginLeft', -this.current.position().left);
+    this.list.stop().css('marginLeft', -this.current.position().left);
   };
   Carousel.prototype.slide = function() {
-    this.list.animate({
+    this.list.stop().animate({
       marginLeft: -this.current.position().left
+    });
+    $(this.wrapper).find('.mask').stop().animate({
+      height: this.current.outerHeight()
     });
   };
   Carousel.prototype.update = function() {
