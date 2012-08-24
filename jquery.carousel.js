@@ -93,10 +93,6 @@
   };
   $.fn.carousel = function(options) {
     this.each(function() {
-      // Ignore if already initialized
-      if ($.data(this, 'carousel')) {
-        return;
-      }
       $.data(this, 'carousel', new Carousel(this, options));
     });
     return this;
