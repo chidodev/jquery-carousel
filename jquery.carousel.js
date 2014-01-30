@@ -1,6 +1,6 @@
 ;(function($, window, document, undefined) {
   var Carousel = function(wrapper, options) {
-    this.wrapper = wrapper
+    this.wrapper = wrapper;
     // Store options while extending defaults
     this.options = $.extend({}, Carousel.defaults, options);
     this.init();
@@ -30,7 +30,7 @@
       // Save order index as their position is going to change
       this.children().each(function(i) {
         // Ignore if already set
-        if ($(this).data('index') == null) {
+        if ($(this).data('index') === null) {
           $(this).data('index', i);
         }
       });
